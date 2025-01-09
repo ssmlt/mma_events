@@ -1,0 +1,91 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Decisions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #007bff;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<h1 class="decisions">Event Decisions</h1>
+    
+    <h2 class="decisions">{{ selected_event.name }}</h2>
+
+    <h3 class="decisions">Bouts</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Bout URL</th>
+        </tr>
+        {% for bout in bouts %}
+            <tr>
+                <td>{{ bout.name }}</td>
+                <td>{{ bout.bout_url }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3 class="decisions">Main Scores</h3>
+    <table>
+        <tr>
+            <th>Judge</th>
+            <th>Score 1</th>
+            <th>Score 2</th>
+        </tr>
+        {% for score in main_scores %}
+            <tr>
+                <td>{{ score.judge }}</td>
+                <td>{{ score.score1 }}</td>
+                <td>{{ score.score2 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Media Scores</h3>
+    <table>
+        <tr>
+            <th>Judge</th>
+            <th>Score</th>
+            <th>Winner</th>
+        </tr>
+        {% for score in media_scores %}
+            <tr>
+                <td>{{ score.judge }}</td>
+                <td>{{ score.score }}</td>
+                <td>{{ score.winner }}</td>
+            </tr>
+        {% endfor %}
+    </table>

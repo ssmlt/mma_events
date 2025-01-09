@@ -1,0 +1,23 @@
+<h1>Media Scores</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Decision Event ID</th>
+        <th>Decision Bout ID</th>
+        <th>Judge</th>
+        <th>Score1</th>
+        <th>Score2</th>
+        <th>Record Created</th>
+    </tr>
+    {% for score in scores %}
+    <tr>
+        <td>{{ score[0] }}</td>
+        <td>{{ score[1] }}</td>
+        <td>{{ score[2] }}</td>
+        <td>{{ score[3] }}</td>
+        <td>{{ score[4] }}</td>
+        <td>{{ score[5] }}</td>
+        <td>{{ score[6] }}</td>
+    </tr>
+    {% endfor %}
+</table>

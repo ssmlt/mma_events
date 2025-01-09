@@ -1,0 +1,33 @@
+    <h1>Upcoming Bouts</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Event ID</th>
+            <th>Fighter 1</th>
+            <th>Fighter 2</th>
+            <th>Fighter 1 URL</th>
+            <th>Fighter 2 URL</th>
+            <th>Fighter 1 result</th>
+            <th>Fighter 2 result</th>
+            <th>Weight Class</th>
+            <th>Card</th>
+            <th>Bout Order</th>
+            <th>record_created_at</th>
+        </tr>
+        {% for bout in bouts %}
+        <tr>
+            <td>{{ bout[0] }}</td>
+            <td>{{ bout[1] }}</td>
+            <td>{{ bout[2] }}</td>
+            <td>{{ bout[3] }}</td>
+            <td>{{ bout[4] }}</td>
+            <td>{{ bout[5] }}</td>
+            <td>{{ bout[6] }}</td>
+            <td>{{ bout[7] }}</td>
+            <td>{{ bout[8] }}</td>
+            <td>{{ bout[9] }}</td>
+            <td>{{ bout[10] }}</td>
+            <td>{{ bout[11] }}</td>
+        </tr>
+        {% endfor %}
+    </table>

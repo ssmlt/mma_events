@@ -1,0 +1,90 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Decisions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1.decisions, h4.decisions {
+            text-align: center;
+            color: #007bff;
+        }
+        h2.decisions, h3.decisions {
+            text-align: center;
+            color: #000000;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="decisions">Event Decisions</h1>
+        
+        <h2 class="decisions">{{ event_name }}</h2>
+
+        {% for bout_name, scores in bouts_data.items() %}
+            <h3 class="decisions">{{ bout_name }}</h3>
+
+            <h4 class="decisions">Main Scores</h4>
+            <table>
+                <tr>
+                    <th>Judge</th>
+                    <th>Score 1</th>
+                    <th>Score 2</th>
+                </tr>
+                {% for score in scores.main_scores %}
+                    <tr>
+                        <td>{{ score.judge }}</td>
+                        <td>{{ score.score1 }}</td>
+                        <td>{{ score.score2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <h4 class="decisions">Media Scores</h4>
+            <table>
+                <tr>
+                    <th>Judge</th>
+                    <th>Score</th>
+                    <th>Winner</th>
+                </tr>
+                {% for score in scores.media_scores %}
+                    <tr>
+                        <td>{{ score.judge }}</td>
+                        <td>{{ score.score }}</td>
+                        <td>{{ score.winner }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    </div>
+</body>
+</html>

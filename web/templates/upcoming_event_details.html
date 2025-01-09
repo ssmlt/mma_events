@@ -1,0 +1,79 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .bouts td {
+            vertical-align: middle;
+        }
+        .fighter {
+            display: flex;
+            align-items: center;
+        }
+        .fighter img {
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        .result {
+            font-weight: bold;
+            color: #28a745;
+        }
+        .result.lost {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<h1>{{ name }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Bout Order</th>
+            <th>Fighter 1</th>
+            <th>Fighter 2</th>
+            <th>Weight Class</th>
+            <th>Card</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bout in bouts %}
+        <tr class="bouts">
+            <td>{{ bout[0] }}</td>
+            <td><a href="{{ bout[3] }}">{{ bout[1] }} ({{ bout[5] }})</a></td>
+            <td><a href="{{ bout[4] }}">{{ bout[2] }}({{ bout[6] }})</a></td>
+            <td>{{ bout[7] }}</td>
+            <td>{{ bout[8] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

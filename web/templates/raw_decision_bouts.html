@@ -1,0 +1,19 @@
+    <h1>Bouts with decisions</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Decision Event ID</th>
+            <th>Name</th>
+            <th>Bout URL</th>
+            <th>Record Created</th>
+        </tr>
+        {% for bout in bouts %}
+        <tr>
+            <td>{{ bout[0] }}</td>
+            <td>{{ bout[1] }}</td>
+            <td>{{ bout[2] }}</td>
+            <td>{{ bout[3] }}</td>
+            <td>{{ bout[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>

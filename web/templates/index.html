@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMA Events and Decisions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            transition: transform 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+        .sidebar h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .sidebar a:hover {
+            color: #007bff;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #fff;
+            margin-left: 300px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #007bff;
+        }
+        #menuToggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        .sidebar.collapsed + .content {
+            margin-left: 70px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .events-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            width: 100%;
+            flex: 1 1 calc(20.00% - 20px);
+
+        }
+        .event {
+            flex: 1 1 calc(20% - 20px); /* Adjust the percentage to control the number of events per row */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .event-logo {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <button id="menuToggle">☰</button>
+    <div class="sidebar" id="sidebar">
+        <h2>MMA Database</h2>
+        <ul>
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="upcoming_events">Upcoming Events</a></li>
+            <li><a href="#" data-page="decisions">Recent Decisions</a></li>
+            <hr>
+            <li><a href="#" data-page="raw_mma_events">mma_events (upcoming) table</a></li>
+            <li><a href="#" data-page="raw_bouts">bouts (upcoming) table</a></li>
+            <li><a href="#" data-page="raw_decision_events">decision_events table</a></li>
+            <li><a href="#" data-page="raw_decision_bouts">decision_bouts table</a></li>
+            <li><a href="#" data-page="raw_decision_main_scores">decision_main_scores table</a></li>
+            <li><a href="#" data-page="raw_decision_media_scores">decision_media_scores table</a></li>
+        </ul>
+    </div>
+    <div class="content" id="content">
+        <h1>Welcome to the MMA Event page</h1>
+        <p><h4>We have here 1) Upcoming Events 2) MMA Decisions</h4></p>
+        <p>Data was scraped from great MMA portals <a href='https://mmadecisions.com/'>MMA Decisions</a> and <a href='https://www.tapology.com'>Tapology</a>. Thanks! </p>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const menuItems = document.querySelectorAll('.sidebar a');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.getAttribute('data-page');
+                loadPage(page);
+            });
+        });
+
+        function loadPage(page) {
+            fetch(`/${page}`)
+                .then(response => response.text())
+                .then(html => {
+                    content.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading page:', error);
+                    content.innerHTML = '<p>Error loading page. Please try again.</p>';
+                });
+        };
+        function loadEventDetails(eventId) {
+            fetch(`/events/${eventId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading event details:', error));
+        };
+        function loadEventPage(event) {
+            event.preventDefault(); // Prevent form submission
+            var eventId = document.getElementById('event_id').value;
+            var contentDiv = document.getElementById('content');
+            
+            // Use AJAX to load the new page content
+            // fetch('/decisions/' + eventId)
+            fetch(`/decisions/${eventId}`)
+                .then(response => response.text())
+                .then(data => {
+                    contentDiv.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    contentDiv.innerHTML = 'Error loading event page';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<h1>Select event with decisions</h1>
+    
+<form id="eventForm" method="POST" onsubmit="loadEventPage(event)">
+    <label for="event_id">Select an event:</label>
+    <select name="event_id" id="event_id">
+        {% for event in events %}
+            <option value="{{ event[0] }}">{{ event[1] }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="View Event" id="eventId">
+</form>

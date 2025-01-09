@@ -1,0 +1,16 @@
+<h1>Upcoming MMA Events</h1>
+<div class="events-container">
+{% for event in events %}
+    <div class="event">
+        {% if event[3] %}
+            <img src="{{ event[3] }}" alt="{{ event[1] }} Logo" class="event-logo">
+        {% endif %}
+        <div class="event-info">
+            <h2><a href="javascript:void(0);" onclick="loadEventDetails({{ event[0] }})">{{ event[1] }}</a></h2>
+            <p><strong>Date:</strong> {{ event[2].strftime('%Y-%m-%d %H:%M') }} UTC +0</p>
+            <p><strong>Promotion:</strong> {{ event[4] }}</p>
+            <p><strong>Location:</strong> {{ event[5] }}</p>
+        </div>
+    </div>
+{% endfor %}
+</div>

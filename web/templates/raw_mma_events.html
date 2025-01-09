@@ -1,0 +1,21 @@
+    <h1>Upcoming MMA Events</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Event Name</th>
+            <th>Date/Time</th>
+            <th>Promotion</th>
+            <th>Location</th>
+            <th>Record Created</th>
+        </tr>
+        {% for event in events %}
+        <tr>
+            <td>{{ event[0] }}</td>
+            <td>{{ event[1] }}</td>
+            <td>{{ event[2] }}</td>
+            <td>{{ event[4] }}</td>
+            <td>{{ event[5] }}</td>
+            <td>{{ event[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
