@@ -190,4 +190,4 @@ def decisions_one_event(event_id):
     return render_template('decisions_one_event.html', bouts_data=bouts_data, event_name=event_name)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
