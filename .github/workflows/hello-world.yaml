@@ -1,10 +1,10 @@
 name: Hello World
 
-on: workflow_dispatch
-#on:
-#  push:
-#    branches:
-#      - main
+on: 
+  workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
   hello:
